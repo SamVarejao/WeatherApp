@@ -1,4 +1,20 @@
 <template>
+  <div>
+    <p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "weather",
+  
+}
+</script>
+
+
+
+
+<!-- Comment  <template>
   <div id="app">
     <HelloWorld msg="placeholder"/>
   </div>
@@ -14,4 +30,4 @@ export default {
   }
 }
 </script>
-
+-->

@@ -34,13 +34,13 @@ async function getJson(url) {
 app.get("/", (req, res) => {
   //lat "41.2876749"
   //lon "-8.079268299999999"
-  let foo = undefined;
+  
   let url = assembleLink(41.2876749, -8.079268299999999);
   getJson(url)
-    .then((x) => {
-      res.json(x);
+    .then((data) => {
+      res.send(data);
     });
-
+console.log(req.body);
 });
 
 const port = process.env.PORT || 5000;
