@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <p>
+  <div id="app">
+    <WeatherComp />
   </div>
 </template>
 
 <script>
+import WeatherComp from "./components/WeatherComp.vue";
 export default {
-  name: "weather",
-  
-}
+  name: "App",
+  components: {
+    WeatherComp,
+  },
+};
 </script>
-
-
-
 
 <!-- Comment  <template>
   <div id="app">
