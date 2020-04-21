@@ -1,15 +1,33 @@
 <template>
   <div id="app">
-    <WeatherComp />
+    <h1>x</h1>
   </div>
 </template>
 
 <script>
-import WeatherComp from "./components/WeatherComp.vue";
+import weatherData from "./weatherData";
+require("dotenv").config();
+
 export default {
   name: "App",
-  components: {
-    WeatherComp,
+  el: "#app",
+  created() {
+    weatherData
+      .getPosition()
+      .then((position) => {
+        return weatherData.assembleLink(
+          position.latitude,
+          position.longitude,
+          process.env.VUE_APP_KEY
+        );
+      })
+      .then((url) => {
+        return weatherData.getJson(url);
+      })
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.error(err.message);
+      });
   },
 };
 </script>

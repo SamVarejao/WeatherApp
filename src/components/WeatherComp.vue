@@ -1,17 +1,21 @@
 <template>
   <div id="Weather">
-    <h1>{{msg}}</h1>
+    <p>{{ msg }}</p>
   </div>
 </template>
 
 <script>
+import weatherData from "../weatherData";
 export default {
-  name: 'WeatherComp',
+  name: "WeatherComp",
   data() {
-    return{
-      msg: "hi"
-    }
-  }
-  
-}
+    return {
+      msg: "hi",
+    };
+  },
+
+  created() {
+    weatherData.getLocation();
+  },
+};
 </script>
