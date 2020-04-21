@@ -10,7 +10,6 @@ require("dotenv").config();
 
 export default {
   name: "App",
-  el: "#app",
   created() {
     weatherData
       .getPosition()
