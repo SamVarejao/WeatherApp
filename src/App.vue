@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>x</h1>
+    <h1>{{message}}</h1>
   </div>
 </template>
 
@@ -10,8 +10,11 @@ require("dotenv").config();
 
 export default {
   name: "App",
+  data() {return {
+    message:null
+  }},
   created() {
-    weatherData
+    let x = weatherData
       .getPosition()
       .then((position) => {
         return weatherData.assembleLink(
@@ -23,28 +26,11 @@ export default {
       .then((url) => {
         return weatherData.getJson(url);
       })
-      .then((data) => console.log(data))
+      .then((data) => this.message= data)
       .catch((err) => {
         console.error(err.message);
       });
+    console.log(x);
   },
 };
 </script>
-
-<!-- Comment  <template>
-  <div id="app">
-    <HelloWorld msg="placeholder"/>
-  </div>
-</template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
--->
