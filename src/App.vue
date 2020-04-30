@@ -1,14 +1,19 @@
 <template>
-  <div id="app">
-    <div class="icon-cont">
-      <img v-bind:src="icon" />
+  <div id="app" class="container">
+    <div class="icon-cont"><img :src="icon" /></div>
+    <div class="header-cont">
+      <h1>Weather</h1>
+      <h1>Temp °C</h1>
+      <h1>Location</h1>
+      <h1>Date/Time</h1>
     </div>
+
     <div class="info-cont">
-      <h3>{{ message.city_name }}</h3>
-      <h3>{{ message.country_code }}</h3>
-      <h3>{{ message.description }}</h3>
-      <h3>{{ message.datetime }}</h3>
-      <h3>{{ message.temp }}</h3>
+      <p>{{ message.city_name }}</p>
+      <p>{{ message.country_code }}</p>
+      <p>{{ message.weather.description }}</p>
+      <p>{{ message.datetime }}</p>
+      <p>{{ message.temp }}</p>
     </div>
   </div>
 </template>
@@ -22,7 +27,7 @@ export default {
   data() {
     return {
       message: "loading...",
-      icon: require("./assets/icons/a01d.png"),
+      icon: "",
     };
   },
   created() {
@@ -38,12 +43,12 @@ export default {
       .then((url) => {
         return weatherData.getJson(url);
       })
-      .then(
-        (data) => (
-          (this.message = data),
-          (this.icon = require("./assets/icons/" + data.icon))
-        )
-      )
+      .then((data) => {
+        this.message = data;
+      //  let x = "./assets/icons/";
+
+        this.icon = require("./assets/icons/" + data.weather.icon + ".png");
+      })
       .catch((err) => {
         console.error(err.message);
       });
@@ -51,3 +56,28 @@ export default {
   },
 };
 </script>
+<style>
+p {
+  display: inline;
+  margin: 0px 10px;
+}
+h1 {
+  display: inline;
+  margin: 0px 10px;
+}
+.container {
+  display: grid;
+  padding: 0px;
+  margin: 0px;
+}
+.header-cont {
+  margin: 0px;
+  background-color: red;
+}
+.info-cont {
+  background-color: blue;
+}
+.icon-cont {
+  background-color: yellow;
+}
+</style>
