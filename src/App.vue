@@ -1,19 +1,30 @@
 <template>
   <div id="app" class="container">
     <div class="icon-cont"><img :src="icon" /></div>
-    <div class="header-cont">
-      <h1>Weather</h1>
-      <h1>Temp °C</h1>
-      <h1>Location</h1>
-      <h1>Date/Time</h1>
-    </div>
 
-    <div class="info-cont">
-      <p>{{ message.city_name }}</p>
-      <p>{{ message.country_code }}</p>
-      <p>{{ message.weather.description }}</p>
-      <p>{{ message.datetime }}</p>
-      <p>{{ message.temp }}</p>
+    <div>
+      <table>
+        <tr>
+          <th><h1>Weather</h1></th>
+          <th><h1>Location</h1></th>
+          <th><h1>Temp °C</h1></th>
+          <th><h1>Date/Time</h1></th>
+        </tr>
+        <tr>
+          <td>
+            <p>{{ message.weather.description }}</p>
+          </td>
+          <td>
+            <p>{{ message.temp }}</p>
+          </td>
+          <td>
+            <p>{{ message.city_name }} {{ message.country_code }}</p>
+          </td>
+          <td>
+            <p>{{ message.datetime }}</p>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -45,7 +56,7 @@ export default {
       })
       .then((data) => {
         this.message = data;
-      //  let x = "./assets/icons/";
+        //  let x = "./assets/icons/";
 
         this.icon = require("./assets/icons/" + data.weather.icon + ".png");
       })
@@ -57,27 +68,45 @@ export default {
 };
 </script>
 <style>
-p {
-  display: inline;
-  margin: 0px 10px;
+html {
+  height: 100%;
 }
-h1 {
-  display: inline;
-  margin: 0px 10px;
+html > body {
+  background-image: url("./assets/background.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
 }
 .container {
-  display: grid;
-  padding: 0px;
-  margin: 0px;
+  position: relative;
+  top: 150px;
+  display: inline-grid;
+  grid-template-columns: 1fr 600px;
+  grid-gap: 20px;
+  padding: 10px;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.785049053801208) 50%,
+    rgba(0, 0, 0, 0.6337885495995272) 60%,
+    rgba(0, 0, 0, 0) 90%
+  );
 }
-.header-cont {
-  margin: 0px;
-  background-color: red;
+.container > div {
+  text-align: center;
+  display: inline;
 }
-.info-cont {
-  background-color: blue;
+.container > div > table {
+  width: 100%;
 }
-.icon-cont {
-  background-color: yellow;
+p {
+  color: white;
+  font-family: 'Open Sans';
+}
+h1 {
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 </style>
